@@ -1,0 +1,40 @@
+services:
+  scientifiksApp:
+    container_name: scientifiksApp
+    build: .
+    image: scientifiks:1.0
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    ports:
+      - 8000:8000
+    volumes:
+      - ./app:/app
+    restart: unless-stopped
+    networks:
+      - scientifiks_net
+    depends_on:
+      - pydb
+
+  scientifiksdb:
+    container_name: scientifiksdb
+    image: mariadb:latest
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    env_file: .env
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    networks:
+      - scientifiks_net
+    restart: unless-stopped
+
+networks:
+  scientifiks_net:
+    name: scientifiks_net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.35.0.0/24
