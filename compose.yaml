@@ -15,7 +15,7 @@ services:
     networks:
       - scientifiks_net
     depends_on:
-      - pydb
+      - scientifiksdb
 
   scientifiksdb:
     container_name: scientifiksdb
