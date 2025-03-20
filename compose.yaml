@@ -10,8 +10,8 @@ services:
     ports:
       - 9500:9500
     volumes:
-      - ./app:/app
-    restart: unless-stopped
+      - ./app:/app #carpeta puente entre el contenedor y la maquina fisica.
+    restart: unless-stopped #politica de reinicio, solo se detendra cuando el administrador la detenga
     networks:
       - scientifiks_net
     depends_on:
@@ -37,4 +37,4 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 10.35.0.0/24
+        - subnet: 10.35.0.0/24 #red interna del contenedor

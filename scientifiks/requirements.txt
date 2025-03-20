@@ -2,3 +2,5 @@ flask
 flask-login
 flask-WTF
 mariadb
+
+#Paquetes de python que necesita la aplicacion para su función
