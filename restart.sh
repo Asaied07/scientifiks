@@ -1,5 +1,6 @@
 #!/bin/bash
+
 docker compose down
-rm -rf dbdata/
-docker system prune -a -f
+docker rmi scientifiks:1.0
 docker compose up -d
+docker compose logs -f

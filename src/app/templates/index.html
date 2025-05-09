@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="col">
+  <br>
+  <h1 class="display-6 text-center text-light">Ultimos articulos redactados en el blog</h1>
+  <br>
+  <div class="overflow-auto rounded-3" style="max-height: 55vh;">
+  {% for row in cons %}
+  <div class="col-md-12 justify-content-center mx-auto">
+    <div class="h-100 p-5 bg-body-tertiary border-light rounded-3 opacity-50">
+      <h2>{{ row[1] }}</h2>
+      <ph2>{{ row[2] }}</p>
+      <a class="btn btn-outline-secondary" type="button" href="{{ url_for('home.read_story', article_id=row[0]) }}">Leer mas...</a>
+    </div>
+  </div>
+  <br>
+  {% endfor %}
+</div>
+<br>
+</div>
+
+{% include "utils/categories.html" %}
+
+{% endblock %}

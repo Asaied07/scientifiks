@@ -14,25 +14,12 @@ services:
     restart: unless-stopped #politica de reinicio, solo se detendra cuando el administrador la detenga
     networks:
       - scientifiks_net
-    depends_on:
-      - scientifiksdb
+    environment:
+      - TZ=America/Panama
 
-  scientifiksdb:
-    container_name: scientifiksdb
-    image: mariadb:latest
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-    env_file: .env
-    volumes:
-      - ./dbdata:/var/lib/mysql
-    networks:
-      - scientifiks_net
-    restart: unless-stopped
 
 networks:
-  scientifiks_net:
+  scientifiks_net:  
     name: scientifiks_net
     driver: bridge
     ipam:
