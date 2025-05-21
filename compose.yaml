@@ -6,22 +6,22 @@ services:
     deploy:
       resources:
         limits:
-          memory: 128M
-    ports:
-      - 9500:9500
-    volumes:
-      - ./app:/app #carpeta puente entre el contenedor y la maquina fisica.
-    restart: unless-stopped #politica de reinicio, solo se detendra cuando el administrador la detenga
-    networks:
-      - scientifiks_net
-    environment:
-      - TZ=America/Panama
+          memory: 128M         # restriccion de memoria para manejo de recursos de sistema
+    ports:                     # puertos utilizados para la conectividad del contenedor
+      - 9500:9500              # el puerto 9500 del contenedor se mapea al puerto 9500 del host
+    volumes:                   # volumenes para persistencia a traves de reinicios
+      - ./src:/src             # carpeta puente entre el contenedor y la maquina fisica.
+    restart: unless-stopped    # politica de reinicio, solo se detendra cuando el administrador la detenga
+    networks:                  # redes asignadas (puede haber mas de una)
+      - scientifiks_net        # se crea red personalizada
+    environment:               # variables de entorno
+      - TZ=America/Panama      # configurar especificamente hora de Panamá
 
 
-networks:
-  scientifiks_net:  
+networks:                      # declaracion de red personalizada
+  scientifiks_net:
     name: scientifiks_net
-    driver: bridge
+    driver: bridge             # tipo de driver usado para configurar la red, existen 3 (bridge, host y none)
     ipam:
       config:
-        - subnet: 10.35.0.0/24 #red interna del contenedor
+        - subnet: 10.35.0.0/24 # direccionamiento de red interna del contenedor
