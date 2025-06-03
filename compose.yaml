@@ -1,11 +1,11 @@
-services:
-  scientifiksApp:
-    container_name: scientifiksApp
-    build: .
-    image: scientifiks:1.0
-    deploy:
-      resources:
-        limits:
+services:                      # Servicios que correran, si te fijas el archivo es una especie de jerarquia
+  scientifiksApp:              # en el cual, las lineas con sangria, dependen de las que tienen menos sangria siempre y cuando este mas arriba que el
+    container_name: scientifiksApp # nombre del contenedor
+    build: .                   # esto indica que usara el Dockerfile que existe en la misma carpeta que esta el compose.yaml
+    image: scientifiks:1.0     # le da un nombre a la imagen que se creara a partir de la construccion
+    deploy:                    # opciones de despliegue
+      resources:               # para administrar recursos
+        limits:                # establece limites en los recursos, ya sea RAM o CPU
           memory: 128M         # restriccion de memoria para manejo de recursos de sistema
     ports:                     # puertos utilizados para la conectividad del contenedor
       - 9500:9500              # el puerto 9500 del contenedor se mapea al puerto 9500 del host
@@ -17,11 +17,10 @@ services:
     environment:               # variables de entorno
       - TZ=America/Panama      # configurar especificamente hora de Panamá
 
-
 networks:                      # declaracion de red personalizada
-  scientifiks_net:
-    name: scientifiks_net
+  scientifiks_net:             # crea la red
+    name: scientifiks_net      # y le pone el nombre
     driver: bridge             # tipo de driver usado para configurar la red, existen 3 (bridge, host y none)
     ipam:
-      config:
+      config:                  # configuraciones personalizadas para esta red
         - subnet: 10.35.0.0/24 # direccionamiento de red interna del contenedor

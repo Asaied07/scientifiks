@@ -1,3 +1,4 @@
+<!-- Aqui se extiende layout.html como la capa base que cubre toda la parte que dice block content y endblock -->
 {% extends "layout.html" %}
 
 {% block content %}
@@ -7,11 +8,14 @@
   <h1 class="display-6 text-center text-light">Ultimos articulos redactados en el blog</h1>
   <br>
   <div class="overflow-auto rounded-3" style="max-height: 55vh;">
+  <!-- aqui recorre la variable cons que contiene todos los articulos de la base de datos y los muestra -->
   {% for row in cons %}
   <div class="col-md-12 justify-content-center mx-auto">
     <div class="h-100 p-5 bg-body-tertiary border-light rounded-3 opacity-50">
+      <!-- luego de crear los elementos y la estetica con bootstrap, llena la informacion sucesivamente -->
       <h2>{{ row[1] }}</h2>
       <ph2>{{ row[2] }}</p>
+      <!-- finalmente crea un enlace a la ruta dinamica donde el id es igual al articulo que se renderizara en article.html -->
       <a class="btn btn-outline-secondary" type="button" href="{{ url_for('home.read_story', article_id=row[0]) }}">Leer mas...</a>
     </div>
   </div>
@@ -21,6 +25,7 @@
 <br>
 </div>
 
+<!-- se incluye el archivo categories.html que se ubica en utils -->
 {% include "utils/categories.html" %}
 
 {% endblock %}

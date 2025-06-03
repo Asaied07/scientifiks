@@ -1,11 +1,15 @@
+<!-- Aqui se extiende layout.html como la capa base que cubre toda la parte que dice block content y endblock -->
 {% extends "layout.html" %}
 
 {% block content %}
 
   <div class="col-md-10 mx-auto">
+    <!-- se formatea el h1 con bootstrap y se encierra en corchetes para que se muestre el valor de article en 1 (el titulo) -->
     <h1 class="display-4 m-5 text-center">{{ article[1]}}</h1>
+    <!-- de la misma forma, muestra el autor y la categoria -->
     <p class="lead">{{ article[2] }}, {{ article[3] }}</p>
     <hr class="my-4">
+    <!-- aqui lee el contenido markdown y lo formatea, se pone el safe xq se conoce la fuente de donde viene (hay que tener cuidado con el codigo malicioso) -->
     {{ md | safe }}
     <br>
     <br>
@@ -13,6 +17,7 @@
     href="{{url_for('home.index')}}" role="button">Regresar</a>
   </div>
   <br>
+<!-- se incluye en esta parte, el codigo de blog/comment.html, una ventaja para trabajar con modularidad -->
   {% include "blog/comment.html" %}
 
 
